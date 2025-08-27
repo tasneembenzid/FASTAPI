@@ -1,0 +1,173 @@
+{
+	"info": {
+		"_postman_id": "credit-scoring-api-collection",
+		"name": "Credit Scoring API with ML",
+		"description": "Collection pour tester l'API de scoring de crédit avec modèle Gradient Boosting",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Health Check",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						""
+					]
+				},
+				"description": "Vérifier que l'API fonctionne correctement"
+			},
+			"response": []
+		},
+		{
+			"name": "Detailed Health Check",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/health",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"health"
+					]
+				},
+				"description": "Vérification détaillée de l'état de l'API"
+			},
+			"response": []
+		},
+		{
+			"name": "Credit Scoring - Bon Client",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"client_id\": \"CLIENT_001\",\n  \"cin\": 12345678,\n  \"age\": 35,\n  \"sexe\": \"M\",\n  \"situation_familiale\": \"Marié\",\n  \"nombre_enfants\": 2,\n  \"niveau_education\": \"Universitaire\",\n  \"region\": \"Tunis\",\n  \"profession\": \"Ingénieur\",\n  \"secteur_activite\": \"Technologie\",\n  \"anciennete_emploi\": 36,\n  \"type_contrat\": \"CDI\",\n  \"type_logement\": \"Propriétaire\",\n  \"anciennete_logement\": 60,\n  \"taux_chomage_sectoriel\": 0.05,\n  \"revenu_mensuel\": 4500.0,\n  \"autres_revenus\": 500.0,\n  \"revenu_total\": 5000.0,\n  \"valeur_immobilier\": 150000.0,\n  \"valeur_vehicule\": 25000.0,\n  \"epargne\": 15000.0,\n  \"patrimoine_total\": 190000.0,\n  \"dette_immobiliere\": 80000.0,\n  \"dette_auto\": 5000.0,\n  \"dette_personnelle\": 2000.0,\n  \"dette_totale\": 87000.0,\n  \"ratio_endettement\": 0.25,\n  \"reste_a_vivre\": 2750.0,\n  \"capacite_remboursement\": 1250.0,\n  \"garanties_disponibles\": 50000.0,\n  \"nombre_credits_anterieurs\": 2,\n  \"anciennete_relation_bancaire\": 72,\n  \"banque_principale\": \"Banque Centrale\",\n  \"retard_maximum_jours\": 0,\n  \"nombre_incidents_12m\": 0,\n  \"nombre_demandes_6m\": 1,\n  \"taux_utilisation_credit\": 0.3,\n  \"regularite_paiements\": 0.98,\n  \"nombre_rejets_12m\": 0,\n  \"score_comportement\": 85.0,\n  \"montant_demande\": 20000.0,\n  \"duree_demande\": 60,\n  \"type_credit\": \"Personnel\",\n  \"mensualite_demandee\": 400.0,\n  \"taux_propose\": 0.08,\n  \"ratio_mensualite_revenu\": 0.08,\n  \"apport_personnel\": 5000.0,\n  \"valeur_garanties\": 25000.0,\n  \"classe_risque\": \"A\",\n  \"score_pd\": 0.02,\n  \"score_lgd\": 0.3,\n  \"score_ead\": 0.8,\n  \"perte_attendue\": 0.0048\n}"
+				},
+				"url": {
+					"raw": "{{base_url}}/predict",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"predict"
+					]
+				},
+				"description": "Test avec un profil de bon client (faible risque)"
+			},
+			"response": []
+		},
+		{
+			"name": "Credit Scoring - Client Risqué",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"client_id\": \"CLIENT_002\",\n  \"cin\": 87654321,\n  \"age\": 28,\n  \"sexe\": \"F\",\n  \"situation_familiale\": \"Célibataire\",\n  \"nombre_enfants\": 0,\n  \"niveau_education\": \"Secondaire\",\n  \"region\": \"Sfax\",\n  \"profession\": \"Employé\",\n  \"secteur_activite\": \"Commerce\",\n  \"anciennete_emploi\": 12,\n  \"type_contrat\": \"CDD\",\n  \"type_logement\": \"Locataire\",\n  \"anciennete_logement\": 24,\n  \"taux_chomage_sectoriel\": 0.12,\n  \"revenu_mensuel\": 1200.0,\n  \"autres_revenus\": 0.0,\n  \"revenu_total\": 1200.0,\n  \"valeur_immobilier\": 0.0,\n  \"valeur_vehicule\": 8000.0,\n  \"epargne\": 500.0,\n  \"patrimoine_total\": 8500.0,\n  \"dette_immobiliere\": 0.0,\n  \"dette_auto\": 6000.0,\n  \"dette_personnelle\": 3000.0,\n  \"dette_totale\": 9000.0,\n  \"ratio_endettement\": 0.75,\n  \"reste_a_vivre\": 300.0,\n  \"capacite_remboursement\": 200.0,\n  \"garanties_disponibles\": 2000.0,\n  \"nombre_credits_anterieurs\": 3,\n  \"anciennete_relation_bancaire\": 18,\n  \"banque_principale\": \"Banque Populaire\",\n  \"retard_maximum_jours\": 45,\n  \"nombre_incidents_12m\": 3,\n  \"nombre_demandes_6m\": 4,\n  \"taux_utilisation_credit\": 0.9,\n  \"regularite_paiements\": 0.65,\n  \"nombre_rejets_12m\": 2,\n  \"score_comportement\": 35.0,\n  \"montant_demande\": 5000.0,\n  \"duree_demande\": 36,\n  \"type_credit\": \"Personnel\",\n  \"mensualite_demandee\": 180.0,\n  \"taux_propose\": 0.15,\n  \"ratio_mensualite_revenu\": 0.15,\n  \"apport_personnel\": 0.0,\n  \"valeur_garanties\": 1000.0,\n  \"classe_risque\": \"D\",\n  \"score_pd\": 0.25,\n  \"score_lgd\": 0.7,\n  \"score_ead\": 0.95,\n  \"perte_attendue\": 0.166\n}"
+				},
+				"url": {
+					"raw": "{{base_url}}/predict",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"predict"
+					]
+				},
+				"description": "Test avec un profil de client risqué (risque élevé)"
+			},
+			"response": []
+		},
+		{
+			"name": "Model Information",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/model/info",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"model",
+						"info"
+					]
+				},
+				"description": "Obtenir des informations sur le modèle ML actuel"
+			},
+			"response": []
+		},
+		{
+			"name": "Feature Importance",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/features/importance",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"features",
+						"importance"
+					]
+				},
+				"description": "Obtenir l'importance des features utilisées dans le modèle"
+			},
+			"response": []
+		},
+		{
+			"name": "Data Validation",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"client_id\": \"CLIENT_TEST\",\n  \"cin\": 12345678,\n  \"age\": 35,\n  \"sexe\": \"M\",\n  \"situation_familiale\": \"Marié\",\n  \"nombre_enfants\": 2,\n  \"niveau_education\": \"Universitaire\",\n  \"region\": \"Tunis\",\n  \"profession\": \"Ingénieur\",\n  \"secteur_activite\": \"Technologie\",\n  \"anciennete_emploi\": 36,\n  \"type_contrat\": \"CDI\",\n  \"type_logement\": \"Propriétaire\",\n  \"anciennete_logement\": 60,\n  \"taux_chomage_sectoriel\": 0.05,\n  \"revenu_mensuel\": 4500.0,\n  \"autres_revenus\": 500.0,\n  \"revenu_total\": 5000.0,\n  \"valeur_immobilier\": 150000.0,\n  \"valeur_vehicule\": 25000.0,\n  \"epargne\": 15000.0,\n  \"patrimoine_total\": 190000.0,\n  \"dette_immobiliere\": 80000.0,\n  \"dette_auto\": 5000.0,\n  \"dette_personnelle\": 2000.0,\n  \"dette_totale\": 87000.0,\n  \"ratio_endettement\": 0.25,\n  \"reste_a_vivre\": 2750.0,\n  \"capacite_remboursement\": 1250.0,\n  \"garanties_disponibles\": 50000.0,\n  \"nombre_credits_anterieurs\": 2,\n  \"anciennete_relation_bancaire\": 72,\n  \"banque_principale\": \"Banque Centrale\",\n  \"retard_maximum_jours\": 0,\n  \"nombre_incidents_12m\": 0,\n  \"nombre_demandes_6m\": 1,\n  \"taux_utilisation_credit\": 0.3,\n  \"regularite_paiements\": 0.98,\n  \"nombre_rejets_12m\": 0,\n  \"score_comportement\": 85.0,\n  \"montant_demande\": 20000.0,\n  \"duree_demande\": 60,\n  \"type_credit\": \"Personnel\",\n  \"mensualite_demandee\": 400.0,\n  \"taux_propose\": 0.08,\n  \"ratio_mensualite_revenu\": 0.08,\n  \"apport_personnel\": 5000.0,\n  \"valeur_garanties\": 25000.0,\n  \"classe_risque\": \"A\",\n  \"score_pd\": 0.02,\n  \"score_lgd\": 0.3,\n  \"score_ead\": 0.8,\n  \"perte_attendue\": 0.0048\n}"
+				},
+				"url": {
+					"raw": "{{base_url}}/model/validate",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"model",
+						"validate"
+					]
+				},
+				"description": "Valider les données d'entrée sans faire de prédiction"
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://localhost:8000",
+			"type": "string"
+		}
+	]
+}
